@@ -1,6 +1,6 @@
 let selectedCat = 'ring';
 
-const GRADIO_URL = 'https://2a91714ef0b14e664d.gradio.live/';
+const GRADIO_URL = 'https://3aa99079569d50f654.gradio.live/';
 
 function selectCat(el, cat) {
 document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
