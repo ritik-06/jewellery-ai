@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurum Atelier — Jewellery Generator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <div class="header">
+    <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="24,4 44,14 44,34 24,44 4,34 4,14" fill="none" stroke="#C9A84C" stroke-width="0.5"/>
+      <polygon points="24,10 38,18 38,30 24,38 10,30 10,18" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.5"/>
+      <circle cx="24" cy="24" r="5" fill="#C9A84C" opacity="0.9"/>
+      <circle cx="24" cy="24" r="3" fill="#0D0C0A"/>
+    </svg>
+    <p class="brand">Aurum Atelier</p>
+    <h1>Design Your <em>Jewel</em></h1>
+    <p class="tagline">Envision. Describe. Behold.</p>
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-gem"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <p class="section-label">Select Piece</p>
+  <div class="categories">
+    <button class="cat-btn active" data-cat="ring" onclick="selectCat(this,'ring')">
+      <svg class="cat-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="9" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="5.5" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
+        <rect x="12" y="5" width="8" height="4" rx="1" fill="currentColor" opacity="0.25"/>
+        <polygon points="16,3 14,6 18,6" fill="currentColor" opacity="0.6"/>
+      </svg>
+      Ring
+    </button>
+    <button class="cat-btn" data-cat="necklace" onclick="selectCat(this,'necklace')">
+      <svg class="cat-icon" viewBox="0 0 32 32" fill="none">
+        <path d="M6 8 Q16 22 26 8" stroke="currentColor" stroke-width="1" fill="none"/>
+        <circle cx="16" cy="22" r="4" stroke="currentColor" stroke-width="0.8"/>
+        <circle cx="16" cy="22" r="2" fill="currentColor" opacity="0.3"/>
+      </svg>
+      Necklace
+    </button>
+    <button class="cat-btn" data-cat="earring" onclick="selectCat(this,'earring')">
+      <svg class="cat-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="9" r="3" stroke="currentColor" stroke-width="0.8"/>
+        <line x1="16" y1="12" x2="16" y2="20" stroke="currentColor" stroke-width="0.8"/>
+        <polygon points="16,20 12,27 20,27" stroke="currentColor" stroke-width="0.8" fill="currentColor" opacity="0.2"/>
+      </svg>
+      Earring
+    </button>
+    <button class="cat-btn" data-cat="bracelet" onclick="selectCat(this,'bracelet')">
+      <svg class="cat-icon" viewBox="0 0 32 32" fill="none">
+        <path d="M8 16 Q8 6 16 6 Q24 6 24 16 Q24 26 16 26 Q8 26 8 16" stroke="currentColor" stroke-width="1" fill="none" stroke-dasharray="3 2"/>
+        <rect x="14" y="4" width="4" height="4" rx="1" fill="currentColor" opacity="0.4"/>
+      </svg>
+      Bracelet
+    </button>
+  </div>
+
+  <p class="section-label">Style & Material</p>
+  <div class="chips" id="style-chips">
+    <span class="chip active" onclick="toggleChip(this)">18k Yellow Gold</span>
+    <span class="chip" onclick="toggleChip(this)">White Gold</span>
+    <span class="chip" onclick="toggleChip(this)">Rose Gold</span>
+    <span class="chip" onclick="toggleChip(this)">Platinum</span>
+    <span class="chip" onclick="toggleChip(this)">Diamond</span>
+    <span class="chip" onclick="toggleChip(this)">Sapphire</span>
+    <span class="chip" onclick="toggleChip(this)">Emerald</span>
+    <span class="chip" onclick="toggleChip(this)">Ruby</span>
+    <span class="chip" onclick="toggleChip(this)">Pearl</span>
+    <span class="chip" onclick="toggleChip(this)">Art Deco</span>
+    <span class="chip" onclick="toggleChip(this)">Minimalist</span>
+    <span class="chip" onclick="toggleChip(this)">Vintage</span>
+  </div>
+
+  <p class="section-label">Describe Your Vision</p>
+  <div class="prompt-wrapper">
+    <textarea id="prompt" placeholder="e.g. A delicate solitaire ring with a round brilliant diamond set in twisted pavé band, inspired by Edwardian filigree..." maxlength="400" oninput="updateChar()"></textarea>
+    <span class="char-count" id="char-count">0 / 400</span>
+  </div>
+
+  <div class="controls-row">
+    <div class="control-group">
+      <label>Render Style</label>
+      <select id="render-style">
+        <option>Photorealistic Studio</option>
+        <option>Soft Diffused Light</option>
+        <option>Dark Luxury Editorial</option>
+        <option>Velvet Background</option>
+        <option>Product Flat Lay</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label>View Angle</label>
+      <select id="view-angle">
+        <option>Front View</option>
+        <option>45° Angle</option>
+        <option>Top Down</option>
+        <option>Close Up Detail</option>
+        <option>Worn on Model</option>
+      </select>
+    </div>
+    <button class="gen-btn" id="gen-btn" onclick="generate()">
+      <span class="btn-text">Generate</span>
+    </button>
+  </div>
+
+  <div class="result-area" id="result-area">
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="result-card">
+      <div class="result-header">
+        <span class="result-title" id="result-title">Your Creation</span>
+        <span class="result-meta" id="result-meta"></span>
+      </div>
+
+      <div class="image-frame" id="image-frame">
+        <div class="corner-accent tl"></div>
+        <div class="corner-accent tr"></div>
+        <div class="corner-accent bl"></div>
+        <div class="corner-accent br"></div>
+
+        <div class="loading-overlay" id="loading-overlay">
+          <div class="spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+          </div>
+          <p class="loading-text" id="loading-text">Crafting your jewel...</p>
+        </div>
+
+        <img id="result-img" src="" alt="" style="display:none;" onload="imageLoaded()" onerror="imageError()"/>
+      </div>
+
+      <div class="result-footer">
+        <span class="prompt-echo" id="prompt-echo"></span>
+        <a class="dl-btn" id="dl-btn" href="#" download="aurum-jewel.png">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M6 1v7M3 5.5l3 3 3-3M1 10h10" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+          Download
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
