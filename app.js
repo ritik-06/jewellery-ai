@@ -1,6 +1,7 @@
 let selectedCat = 'ring';
 
 const GRADIO_URL = 'https://f8bf513a6a82f1e025.gradio.live/';
+const HF_URL = 'ritik-raj/jewellery-ai';
 
 function selectCat(el, cat) {
 document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
@@ -107,10 +108,20 @@ resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
 try {
     const { Client } = await import('https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js');
-    const client = await Client.connect(GRADIO_URL);
-    const result = await client.predict('/predict', {
+    
+    let client, result;
+
+    try {
+        client = await Client.connect(GRADIO_URL);
+        result = await client.predict('/predict', {
         user_prompt: fullPrompt
     });
+    } catch (e) {
+        client = await Client.connect(HF_URL);
+        result = await client.predict('/run_agent', {
+        user_prompt: fullPrompt
+    });
+    }
 
     clearInterval(msgInterval);
 
