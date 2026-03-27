@@ -1,6 +1,6 @@
 let selectedCat = 'ring';
 
-const GRADIO_URL = 'https://20ffdec4f37fd76f0a.gradio.live/';
+const GRADIO_URL = 'https://05f2a31095db4a0e8b.gradio.live/';
 const HF_URL = 'ritik-raj/jewellery-ai';
 
 function selectCat(el, cat) {
