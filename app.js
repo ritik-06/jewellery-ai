@@ -1,6 +1,6 @@
 let selectedCat = 'ring';
 
-const GRADIO_URL = 'https://3aa99079569d50f654.gradio.live/';
+const GRADIO_URL = 'https://f8bf513a6a82f1e025.gradio.live/';
 
 function selectCat(el, cat) {
 document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
@@ -109,10 +109,7 @@ try {
     const { Client } = await import('https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js');
     const client = await Client.connect(GRADIO_URL);
     const result = await client.predict('/predict', {
-    user_prompt: fullPrompt, 		
-    jewelry_type: "ring", 		
-    stones: "Hello!!", 		
-    length: "Hello!!", 
+        user_prompt: fullPrompt
     });
 
     clearInterval(msgInterval);
